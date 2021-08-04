@@ -35,6 +35,58 @@ void prepend(node **head, int item)
 
 }
 
+void append(node **head, int item)
+{
+    node *newnode=create_node(item,NULL,NULL);
+    if(*head==NULL)
+    {
+        *head=newnode;
+        return;
+    }
+    node *current=*head;
+
+    while(current->next!=NULL)
+    {
+        current=current->next;
+    }
+    current->next=newnode;
+    newnode->prev=current;
+}
+
+void delete_node(node **head, int item)
+{
+    node *temp,*temp2;
+    if((*head)->data==item)
+    {
+        temp=(*head)->next;
+        *head=temp;
+        (*head)->prev=NULL;
+        return;
+    }
+
+    node *current=*head;
+    while(current->data!=item)
+    {
+        current=current->next;
+    }
+
+
+    temp=(current->next)->prev;
+    temp2=current->prev;
+    (current->prev)->next=current->next;
+    temp=temp2;
+
+
+//    temp=current->prev;
+//    temp2=current->next;
+//
+//    temp->next=temp2;
+//    temp2->prev=temp;
+
+    free(current);
+
+}
+
 void display(node *head)
 {
     if(head==NULL)
@@ -53,6 +105,11 @@ int main()
     prepend(h,12);
     prepend(h,11);
     prepend(h,10);
+    append(h,13);
+    display(head);
+
+    printf("\nAfter delete\n");
+    delete_node(h,12);
     display(head);
 
 }
