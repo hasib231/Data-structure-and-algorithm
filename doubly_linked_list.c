@@ -69,6 +69,12 @@ void delete_node(node **head, int item)
     {
         current=current->next;
     }
+    if(current->next==NULL)
+    {
+        (current->prev)->next=NULL;
+        free(current);
+        return;
+    }
 
 
 //    temp=(current->next)->prev;
