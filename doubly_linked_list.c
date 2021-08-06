@@ -77,17 +77,17 @@ void delete_node(node **head, int item)
     }
 
 
-//    temp=(current->next)->prev;
-//    temp2=current->prev;
-//    (current->prev)->next=current->next;
-//    temp=temp2;
+    temp=(current->next)->prev;
+    temp2=current->prev;
+    (current->prev)->next=current->next;
+    temp=temp2;
 
 
-    temp=current->prev;
-    temp2=current->next;
-
-    temp->next=temp2;
-    temp2->prev=temp;
+//    temp=current->prev;
+//    temp2=current->next;
+//
+//    temp->next=temp2;
+//    temp2->prev=temp;
 
     free(current);
 
@@ -95,7 +95,7 @@ void delete_node(node **head, int item)
 
 void m_after_insert(node **head,int c_item,int new_item)
 {
-    node *newnode,*current,*temp1,*temp2;
+    node *newnode,*current,*temp1;
     newnode=create_node(new_item,NULL,NULL);
     current=*head;
 
@@ -104,15 +104,31 @@ void m_after_insert(node **head,int c_item,int new_item)
         current=current->next;
     }
     temp1=current->next;
-    temp2=(current->next)->prev;
 
     newnode->prev=current;
     current->next=newnode;
 
     newnode->next=temp1;
-    temp2=newnode;
+    temp1->prev=newnode;
 
 }
+
+//void m_after_insert(node **head,int c_item,int new_item)
+//{
+//    node *newnode,*current,*temp1,*temp2;
+//    newnode=create_node(new_item,NULL,NULL);
+//    current=*head;
+//
+//    while(current->data!=c_item)
+//    {
+//        current=current->next;
+//    }
+//    newnode->next=current->next;
+//    current->next=newnode;
+//    newnode->prev=current;
+//    newnode->next->prev=newnode;
+//
+//}
 
 void display(node *head)
 {
